@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<script>
 
-    </head>
-    <body>
 
-    </body>
-    <script>
+    function computerPlay() {
+        let gameChoices = ['Rock', 'Paper', 'Scissors']
+        compChoice = gameChoices[Math.floor(Math.random() * 3)]
+        return compChoice;
+    }
+
+
+    function playRound(playerSelection, computerSelection) {
+        let message;
         
-    </script>
+        if (playerSelection !== undefined && computerSelection !== "undefined")
+            {   
+                playerSelection = playerSelection.toLowerCase()
+                playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
+
+                computerSelection = computerSelection.toLowerCase()
+                computerSelection = computerSelection.replace(computerSelection.charAt(0), computerSelection.charAt(0).toUpperCase());
+
+
+            }       
+
+        if (playerSelection == computerSelection) {
+            message = `You Tie! ${playerSelection} ties ${computerSelection}`;
+            return message;
+        }
+
+        if (playerSelection === 'Rock') {
+
+            if (computerSelection === "Scissors") {
+                message = `You Win! ${playerSelection} beats ${computerSelection}`;
+            } else {
+                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
+
+        if (playerSelection === 'Paper') {
+
+            if (computerSelection === "Rock") {
+                message = `You Win! ${playerSelection} beats ${computerSelection}`;
+            } else {
+                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
+
+        if (playerSelection === 'Scissors') {
+
+            if (computerSelection === "Paper") {
+                message = `You Win! ${playerSelection} beats ${computerSelection}`;
+            } else {
+                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
+
+        return message;
+    }
+
+
+
+    const computerSelection = computerPlay();
+    let playerSelection = "scissors";
+
+    let gameResult = playRound(playerSelection, computerSelection);
+    console.log(gameResult);
+
+
+</script>
+
 </html>

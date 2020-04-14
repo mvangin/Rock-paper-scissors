@@ -11,32 +11,25 @@
 
 
     function playRound(playerSelection, computerSelection) {
-        let message
         let compWin=0;
         let playerWin=0;
-
-        if (playerSelection !== undefined && computerSelection !== "undefined") {
-            playerSelection = playerSelection.toLowerCase()
-            playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
-
-            computerSelection = computerSelection.toLowerCase()
-            computerSelection = computerSelection.replace(computerSelection.charAt(0), computerSelection.charAt(0).toUpperCase());
-        }
+        let winner;
 
         if (playerSelection == computerSelection) {
-            message = `You Tie! ${playerSelection} ties ${computerSelection}`;
+            winner = 'tie';
             compWin = 1;
-            playerWin =1;
-            return [message, playerWin, compWin];
+            playerWin = 1;
+            consoleOutput(winner, playerSelection, computerSelection);
+            return [playerWin, compWin];
         }
 
         if (playerSelection === 'Rock') {
 
             if (computerSelection === "Scissors") {
-                message = `You Win! ${playerSelection} beats ${computerSelection}`;
+                winner = `player`;
                 playerWin = 1;
             } else {
-                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                winner = `computer`;
                 compWin=1;
             }
         }
@@ -44,10 +37,10 @@
         if (playerSelection === 'Paper') {
 
             if (computerSelection === "Rock") {
-                message = `You Win! ${playerSelection} beats ${computerSelection}`;
-                playerWin =1;
+                winner =  `player`;
+                playerWin = 1;
             } else {
-                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                winner = `computer`;
                 compWin =1;
             }
         }
@@ -55,36 +48,57 @@
         if (playerSelection === 'Scissors') {
 
             if (computerSelection === "Paper") {
-                message = `You Win! ${playerSelection} beats ${computerSelection}`;
+                winner = `player`;
                 playerWin=1;
             } else {
-                message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                winner = `computer`;
                 compWin =1;
 
             }
         }
+        consoleOutput(winner, playerSelection, computerSelection);
+        return [playerWin, compWin];
+    }
 
-        return [message, playerWin, compWin];
+
+    function consoleOutput(result, playerSelection, computerSelection) {
+        switch (result) {
+            case 'tie': 
+            console.log(`You Tie! ${playerSelection} ties ${computerSelection}`);
+            break;
+
+            case 'player':
+            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+            break;
+
+            case 'computer':
+            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            break;
+
+        }
     }
 
 
 
     
 
+    
+
     function game() {
+        let compTally = 0;
+        let playerTally =0;
         let n;
         let playerSelection;
         let computerSelection;
-        let compTally = 0;
-        let playerTally =0;
 
         for (n = 0; n < 5; n++) {
-            playerSelection = prompt("enter rock, paper, or scissors (not case sensitive)");
+            playerSelection = prompt("enter rock, paper, or scissors (not case sensitive)").toLowerCase();
+            playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
+
             computerSelection = computerPlay();
             let gameResult = playRound(playerSelection, computerSelection);
-            console.log(gameResult[0]);
-            playerTally += gameResult[1];
-            compTally += gameResult[2];
+            playerTally += gameResult[0];
+            compTally += gameResult[1];
         }
         console.log("player total: " + playerTally);
         console.log("computer total: " + compTally);

@@ -11,30 +11,33 @@
 
 
     function playRound(playerSelection, computerSelection) {
-        let message;
-        
-        if (playerSelection !== undefined && computerSelection !== "undefined")
-            {   
-                playerSelection = playerSelection.toLowerCase()
-                playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
+        let message
+        let compWin=0;
+        let playerWin=0;
 
-                computerSelection = computerSelection.toLowerCase()
-                computerSelection = computerSelection.replace(computerSelection.charAt(0), computerSelection.charAt(0).toUpperCase());
+        if (playerSelection !== undefined && computerSelection !== "undefined") {
+            playerSelection = playerSelection.toLowerCase()
+            playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
 
-
-            }       
+            computerSelection = computerSelection.toLowerCase()
+            computerSelection = computerSelection.replace(computerSelection.charAt(0), computerSelection.charAt(0).toUpperCase());
+        }
 
         if (playerSelection == computerSelection) {
             message = `You Tie! ${playerSelection} ties ${computerSelection}`;
-            return message;
+            compWin = 1;
+            playerWin =1;
+            return [message, playerWin, compWin];
         }
 
         if (playerSelection === 'Rock') {
 
             if (computerSelection === "Scissors") {
                 message = `You Win! ${playerSelection} beats ${computerSelection}`;
+                playerWin = 1;
             } else {
                 message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                compWin=1;
             }
         }
 
@@ -42,8 +45,10 @@
 
             if (computerSelection === "Rock") {
                 message = `You Win! ${playerSelection} beats ${computerSelection}`;
+                playerWin =1;
             } else {
                 message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                compWin =1;
             }
         }
 
@@ -51,21 +56,49 @@
 
             if (computerSelection === "Paper") {
                 message = `You Win! ${playerSelection} beats ${computerSelection}`;
+                playerWin=1;
             } else {
                 message = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                compWin =1;
+
             }
         }
 
-        return message;
+        return [message, playerWin, compWin];
     }
 
 
 
-    const computerSelection = computerPlay();
-    let playerSelection = "scissors";
+    
 
-    let gameResult = playRound(playerSelection, computerSelection);
-    console.log(gameResult);
+    function game() {
+        let n;
+        let playerSelection;
+        let computerSelection;
+        let compTally = 0;
+        let playerTally =0;
+
+        for (n = 0; n < 5; n++) {
+            playerSelection = prompt("enter rock, paper, or scissors (not case sensitive)");
+            computerSelection = computerPlay();
+            let gameResult = playRound(playerSelection, computerSelection);
+            console.log(gameResult[0]);
+            playerTally += gameResult[1];
+            compTally += gameResult[2];
+        }
+        console.log("player total: " + playerTally);
+        console.log("computer total: " + compTally);
+
+    }
+
+
+    game();
+
+   //const computerSelection = computerPlay();
+    //let playerSelection = "scissors";
+
+   // let gameResult = playRound(playerSelection, computerSelection);
+   // console.log(gameResult);
 
 
 </script>

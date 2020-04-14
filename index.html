@@ -2,17 +2,15 @@
 <html>
 <script>
 
-
     function computerPlay() {
         let gameChoices = ['Rock', 'Paper', 'Scissors']
         compChoice = gameChoices[Math.floor(Math.random() * 3)]
         return compChoice;
     }
 
-
     function playRound(playerSelection, computerSelection) {
-        let compWin=0;
-        let playerWin=0;
+        let compWin = 0;
+        let playerWin = 0;
         let winner;
 
         if (playerSelection == computerSelection) {
@@ -30,18 +28,18 @@
                 playerWin = 1;
             } else {
                 winner = `computer`;
-                compWin=1;
+                compWin = 1;
             }
         }
 
         if (playerSelection === 'Paper') {
 
             if (computerSelection === "Rock") {
-                winner =  `player`;
+                winner = `player`;
                 playerWin = 1;
             } else {
                 winner = `computer`;
-                compWin =1;
+                compWin = 1;
             }
         }
 
@@ -49,10 +47,10 @@
 
             if (computerSelection === "Paper") {
                 winner = `player`;
-                playerWin=1;
+                playerWin = 1;
             } else {
                 winner = `computer`;
-                compWin =1;
+                compWin = 1;
 
             }
         }
@@ -63,30 +61,24 @@
 
     function consoleOutput(result, playerSelection, computerSelection) {
         switch (result) {
-            case 'tie': 
-            console.log(`You Tie! ${playerSelection} ties ${computerSelection}`);
-            break;
+            case 'tie':
+                console.log(`You Tie! ${playerSelection} ties ${computerSelection}`);
+                break;
 
             case 'player':
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
-            break;
+                console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+                break;
 
             case 'computer':
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
-            break;
+                console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+                break;
 
         }
     }
 
-
-
-    
-
-    
-
     function game() {
         let compTally = 0;
-        let playerTally =0;
+        let playerTally = 0;
         let n;
         let playerSelection;
         let computerSelection;
@@ -104,16 +96,9 @@
         console.log("computer total: " + compTally);
 
     }
-
-
+    
+    // run the game!
     game();
-
-   //const computerSelection = computerPlay();
-    //let playerSelection = "scissors";
-
-   // let gameResult = playRound(playerSelection, computerSelection);
-   // console.log(gameResult);
-
 
 </script>
 

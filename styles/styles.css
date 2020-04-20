@@ -1,0 +1,27 @@
+.gameContainer{
+    width: 100%;
+    text-align: center;
+}
+
+.Rock, .Paper, .Scissors {
+    padding: 20px;
+    margin-top: 180px;
+
+}
+
+.resultContainer, .runningScore {
+    padding-top: 20px;
+}
+
+
+.winnerStyle {
+    transition: font-size 2s ease;
+    padding-top: 100px;
+    font-size: 5rem;
+}
+
+.loserStyle {
+    transition: font-size 2s ease;
+    padding-top: 100px;
+    font-size: 5rem;
+}

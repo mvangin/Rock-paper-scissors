@@ -1,6 +1,55 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <link href="styles/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class='gameContainer'>
+        <div class="buttonContainer">
+            <button class='Rock'> Rock </button>
+            <button class='Paper'> Paper </button>
+            <button class='Scissors'> Scissors </button>
+        </div>
+
+
+        <div class="resultContainer">
+        </div>
+
+        <div class="runningScore">
+
+
+        </div>
+
+    </div>
+
+
+
+</body>
 <script>
+    const gameContainer = document.querySelector(".gameContainer");
+    const resultContainer = document.querySelector('.resultContainer');
+    const docBackground = document.querySelector('html');
+    const runningScore = document.querySelector('.runningScore');
+    const buttons = document.querySelectorAll('button');
+    const buttonContainer = document.querySelector(".buttonContainer")
+
+
+    let compTally = 0;
+    let playerTally = 0;
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', roundTextContent.bind(this, button));
+    });
+
+
+    function roundTextContent(button) {
+        let playerSelection;
+        playerSelection = button.className;
+        game(playerSelection);
+    }
+
 
     function computerPlay() {
         let gameChoices = ['Rock', 'Paper', 'Scissors']
@@ -12,6 +61,8 @@
         let compWin = 0;
         let playerWin = 0;
         let winner;
+
+
 
         if (playerSelection == computerSelection) {
             winner = 'tie';
@@ -60,45 +111,82 @@
 
 
     function consoleOutput(result, playerSelection, computerSelection) {
+
+
         switch (result) {
             case 'tie':
-                console.log(`You Tie! ${playerSelection} ties ${computerSelection}`);
+                resultContainer.textContent = `You Tie! ${playerSelection} ties ${computerSelection}`;
                 break;
 
             case 'player':
-                console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+                resultContainer.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
                 break;
 
             case 'computer':
-                console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+                resultContainer.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
                 break;
 
         }
     }
 
-    function game() {
-        let compTally = 0;
-        let playerTally = 0;
-        let n;
-        let playerSelection;
+    function game(playerSelection) {
+        //let n;
         let computerSelection;
 
-        for (n = 0; n < 5; n++) {
-            playerSelection = prompt("enter rock, paper, or scissors (not case sensitive)").toLowerCase();
-            playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
+        //for (n = 0; n < 5; n++) {
+        //  playerSelection = prompt("enter rock, paper, or scissors (not case sensitive)").toLowerCase();
+        //    playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
 
-            computerSelection = computerPlay();
-            let gameResult = playRound(playerSelection, computerSelection);
-            playerTally += gameResult[0];
-            compTally += gameResult[1];
+        computerSelection = computerPlay();
+        let gameResult = playRound(playerSelection, computerSelection);
+        playerTally += gameResult[0];
+        compTally += gameResult[1];
+        // }
+
+        runningScore.textContent = `Player total: ${playerTally} \n Computer total: ${compTally}`;
+
+
+        if (compTally == 5 || playerTally == 5) {
+            if (compTally == 5) {
+                resultContainer.textContent = "You LOSE!!!!";
+                resultContainer.classList.add('loserStyle');
+                docBackground.style.backgroundColor = "red";
+            } else {
+                resultContainer.classList.add("winnerStyle");
+                resultContainer.textContent = "you WINNN YIPPEEEEEEEE";
+                docBackground.style.backgroundColor = "green";
+            }
+
+
+            const gameBtn = document.createElement("button");
+            gameBtn.textContent = "NEW GAME!";
+            gameBtn.setAttribute('id', 'gameBtn');
+            gameBtn.style.padding = "20px";
+            gameBtn.style.margin = "20px";
+            gameContainer.appendChild(gameBtn);
+            buttonContainer.style.display = "none";
+
+            gameBtn.addEventListener('click', () => {
+                resultContainer.classList.remove('loserStyle');
+                resultContainer.classList.remove('winnerStyle');
+                resultContainer.textContent = "";
+                runningScore.textContent = "";
+                docBackground.style.backgroundColor = "white";
+                gameContainer.removeChild(gameBtn)
+                buttonContainer.style.display = "block";
+            });
+
+            compTally = 0;
+            playerTally = 0;
+
         }
-        console.log("player total: " + playerTally);
-        console.log("computer total: " + compTally);
-
     }
-    
+
+
+
+
     // run the game!
-    game();
+   // game();
 
 </script>
 

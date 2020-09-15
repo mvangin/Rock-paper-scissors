@@ -3,9 +3,14 @@
     text-align: center;
 }
 
+.gameTitle {
+    margin-top: 50px;
+    text-align: center;
+}
+
 .Rock, .Paper, .Scissors {
     padding: 20px;
-    margin-top: 180px;
+    margin-top: 50px;
 
 }
 
